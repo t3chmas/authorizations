@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.github.hasable.authorizations.web.com.github.hasable.authorizations.web.AutoConfig

@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/changesets/202405021207-create-permission.yml
+  - include:
+      file: liquibase/changesets/202405191443-create-role.yml
+  - include:
+      file: liquibase/changesets/202406161124-create-user.yml

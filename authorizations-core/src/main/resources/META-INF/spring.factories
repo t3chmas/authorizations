@@ -1,0 +1,4 @@
+# META-INF/spring.factories
+
+# Auto Configuration classes
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.github.hasable.authorizations.core.AutoConfiguration

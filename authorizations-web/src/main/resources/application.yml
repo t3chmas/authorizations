@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: '@project.name@'
+    description: '@project.description@'
+    build:
+      timestamp: '@maven.build.timestamp@'
+
+server:
+  undertow:
+    # Nombre de threads utilisés pour les requêtes
+    io-threads: 16
+    worker-threads: 64
+    accesslog:
+      enabled: true
+      directory: ./logs       # Répertoire pour stocker les logs
+      pattern: '%h %l %u %t "%r" %s %b "%{i,Referer}" "%{i,User-Agent}" %D'
+      prefix: access_log       # Préfixe des fichiers de log
+      suffix: .log             # Suffixe du fichier de log
+      rotate: true             # Rotation des logs (généralement quotidienne)

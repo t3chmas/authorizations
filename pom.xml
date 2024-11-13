@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.5</version>
+    </parent>
+
+    <groupId>com.github.hasable.authorizations</groupId>
+    <artifactId>authorizations</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>authorizations</name>
+    <description>Authorizations application, used to self train to several libs and architecture patterns</description>
+
+    <developers>
+        <developer>
+            <name>hasable</name>
+            <organizationUrl>https://github.com/hasable/</organizationUrl>
+        </developer>
+    </developers>
+
+    <modules>
+        <module>authorizations-core</module>
+        <module>authorizations-storage</module>
+        <module>authorizations-web</module>
+        <module>authorizations-app</module>
+        <!--<module>dam-authorizations</module>-->
+    </modules>
+
+    <properties>
+        <gatling.version>3.12.0</gatling.version>
+        <java.version>17</java.version>
+        <mapstruct.version>1.6.2</mapstruct.version>
+        <dependency-check-maven.version>11.1.0</dependency-check-maven.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Internal dependencies -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>authorizations-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>authorizations-storage</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>authorizations-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>authorizations-app</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok-mapstruct-binding -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-mapstruct-binding</artifactId>
+                <version>0.2.0</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/io.gatling/ -->
+            <dependency>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-core</artifactId>
+                <version>${gatling.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-http</artifactId>
+                <version>${gatling.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <!-- Lot of libs in this project, due to hexagonal architecture. I do not want Maven to create and
+                    executable JAR for each of those. Plugin will be enabled only for real executable modules. -->
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <argLine>-XX:+EnableDynamicAgentLoading</argLine>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>report</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.owasp</groupId>
+                    <artifactId>dependency-check-maven</artifactId>
+                    <version>11.1.0</version>
+                    <configuration>
+                        <!-- API Key is configured in settings.xml -->
+                        <nvdApiServerId>nvd.nist.gov</nvdApiServerId>
+                        <failBuildOnCVSS>8</failBuildOnCVSS>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>${dependency-check-maven.version}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>

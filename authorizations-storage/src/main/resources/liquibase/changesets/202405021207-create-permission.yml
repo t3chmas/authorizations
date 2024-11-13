@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-permission-table
+      author: hasable
+      changes:
+        - createTable:
+            tableName: permission
+            remarks: List of usable permissions
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_permission_id
+                    nullable: false
+                    notNullConstraintName: nn_permission_id
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_permission_code
+                    unique: true
+                    uniqueConstraintName: uq_permission_code
+              - column:
+                  name: description
+                  type: clob
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_permission_created_at
+              - column:
+                  name: modified_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_permission_modified_at
+        - createSequence:
+             sequenceName: permission_id_seq
+             cycle: false
+             startValue: 1024
+             incrementBy: 1

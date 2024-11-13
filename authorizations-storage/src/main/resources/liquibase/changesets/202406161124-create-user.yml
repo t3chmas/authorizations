@@ -1,0 +1,112 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-tables
+      author: hasable
+      changes:
+        - createTable:
+            tableName: user
+            remarks: List of users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_user_id
+                    nullable: false
+                    notNullConstraintName: nn_user_id
+              - column:
+                  name: login
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_user_login
+                    unique: true
+                    uniqueConstraintName: uq_user_login
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_role_created_at
+              - column:
+                  name: modified_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_role_modified_at
+        - createSequence:
+             sequenceName: user_id_seq
+             cycle: false
+             startValue: 1024
+             incrementBy: 1
+        - createTable:
+            tableName: user_role
+            remarks: List roles for each user
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_user_role_user_id
+                    foreignKeyName: fk_user_role_user_id
+                    referencedTableName: user
+                    referencedColumnNames: id
+              - column:
+                  name: role_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_user_role_role_id
+                    foreignKeyName: fk_user_role_role_id
+                    referencedTableName: role
+                    referencedColumnNames: id
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: now(3)
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_role_created_at
+              - column:
+                  name: modified_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_role_modified_at
+        - createTable:
+            tableName: user_permission
+            remarks: List permissions for each user
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_user_permission_user_id
+                    foreignKeyName: fk_user_permission_user_id
+                    referencedTableName: user
+                    referencedColumnNames: id
+              - column:
+                  name: permission_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_user_permission_permission_id
+                    foreignKeyName: fk_user_permission_permission_id
+                    referencedTableName: permission
+                    referencedColumnNames: id
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: now(3)
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_role_created_at
+              - column:
+                  name: modified_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_role_modified_at
