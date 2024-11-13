@@ -7,6 +7,6 @@
 
 *.md text
 *.rst text
-*.json text :wq
+*.json text
 merge=union
 
