@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.5</version>
+        <version>3.4.0</version>
     </parent>
 
     <groupId>com.github.hasable.authorizations</groupId>
@@ -31,9 +31,9 @@
     </modules>
 
     <properties>
-        <gatling.version>3.12.0</gatling.version>
+        <gatling.version>3.13.1</gatling.version>
         <java.version>17</java.version>
-        <mapstruct.version>1.6.2</mapstruct.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
         <dependency-check-maven.version>11.1.0</dependency-check-maven.version>
     </properties>
 
