@@ -1,7 +1,7 @@
 package com.github.hasable.authorizations.web.domain.permission;
 
-import com.github.hasable.authorizations.core.permission.PermissionService;
-import com.github.hasable.authorizations.web.domain.common.ResourceNotFoundException;
+import com.github.t3chmas.authorizations.core.permission.PermissionService;
+import com.github.t3chmas.authorizations.web.domain.common.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

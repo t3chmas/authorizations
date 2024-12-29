@@ -2,20 +2,20 @@ package com.github.hasable.authorizations.web.domain.permission;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.hasable.authorizations.core.permission.Permission;
-import com.github.hasable.authorizations.core.permission.PermissionService;
-import com.github.hasable.authorizations.web.domain.config.HalHateoasConfiguration;
+import com.github.t3chmas.authorizations.core.permission.Permission;
+import com.github.t3chmas.authorizations.core.permission.PermissionService;
+import com.github.t3chmas.authorizations.web.domain.config.HalHateoasConfiguration;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.hateoas.PagedModel;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class PermissionControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private PermissionService permissionService;
 
     @Autowired
