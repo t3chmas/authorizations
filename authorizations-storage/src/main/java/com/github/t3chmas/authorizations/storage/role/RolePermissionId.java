@@ -1,19 +1,17 @@
-package com.github.hasable.authorizations.storage.role;
+package com.github.t3chmas.authorizations.storage.role;
 
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class RolePermissionId {
 
-  private long roleId;
+    private long roleId;
 
-  private long permissionId;
+    private long permissionId;
 }

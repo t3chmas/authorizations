@@ -1,6 +1,6 @@
-package com.github.hasable.authorizations.web.domain;
+package com.github.t3chmas.authorizations.web.domain;
 
-import com.github.hasable.authorizations.web.domain.permission.PermissionController;
+import com.github.t3chmas.authorizations.web.domain.permission.PermissionController;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

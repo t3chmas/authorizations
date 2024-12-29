@@ -1,4 +1,4 @@
-package com.github.hasable.authorizations.web.domain.permission;
+package com.github.t3chmas.authorizations.web.domain.permission;
 
 import lombok.*;
 
@@ -10,11 +10,13 @@ import lombok.*;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class PermissionDTO {
 
-  @NonNull @EqualsAndHashCode.Include private String code;
+    @NonNull
+    @EqualsAndHashCode.Include
+    private String code;
 
-  private String description;
+    private String description;
 
-  public PermissionDTO(final String code) {
-    this(code, null);
-  }
+    public PermissionDTO(final String code) {
+        this(code, null);
+    }
 }

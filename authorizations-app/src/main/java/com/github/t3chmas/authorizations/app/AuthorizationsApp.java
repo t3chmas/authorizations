@@ -1,10 +1,9 @@
-package com.github.hasable.authorizations.app;
+package com.github.t3chmas.authorizations.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages =
-    "com.github.hasable.authorizations")
+@SpringBootApplication
 public class AuthorizationsApp {
 
     public static void main(String... args) {

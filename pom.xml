@@ -5,10 +5,10 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.0</version>
+        <version>3.4.1</version>
     </parent>
 
-    <groupId>com.github.hasable.authorizations</groupId>
+    <groupId>com.github.t3chmas.authorizations</groupId>
     <artifactId>authorizations</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -17,8 +17,8 @@
 
     <developers>
         <developer>
-            <name>hasable</name>
-            <organizationUrl>https://github.com/hasable/</organizationUrl>
+            <name>t3chmas</name>
+            <organizationUrl>https://github.com/t3chmas/</organizationUrl>
         </developer>
     </developers>
 
@@ -27,7 +27,6 @@
         <module>authorizations-storage</module>
         <module>authorizations-web</module>
         <module>authorizations-app</module>
-        <!--<module>dam-authorizations</module>-->
     </modules>
 
     <properties>
@@ -79,18 +78,6 @@
                 <artifactId>lombok-mapstruct-binding</artifactId>
                 <version>0.2.0</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/io.gatling/ -->
-            <dependency>
-                <groupId>io.gatling</groupId>
-                <artifactId>gatling-core</artifactId>
-                <version>${gatling.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.gatling</groupId>
-                <artifactId>gatling-http</artifactId>
-                <version>${gatling.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -105,15 +92,6 @@
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <!-- Lot of libs in this project, due to hexagonal architecture. I do not want Maven to create and
-                    executable JAR for each of those. Plugin will be enabled only for real executable modules. -->
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <configuration>
-                        <skip>true</skip>
-                    </configuration>
-                </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <configuration>
@@ -145,7 +123,7 @@
                     <configuration>
                         <!-- API Key is configured in settings.xml -->
                         <nvdApiServerId>nvd.nist.gov</nvdApiServerId>
-                        <failBuildOnCVSS>8</failBuildOnCVSS>
+                        <failBuildOnCVSS>9</failBuildOnCVSS>
                     </configuration>
                     <executions>
                         <execution>

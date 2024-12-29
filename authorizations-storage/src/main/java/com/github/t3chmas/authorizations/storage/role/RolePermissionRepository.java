@@ -1,4 +1,4 @@
-package com.github.hasable.authorizations.storage.role;
+package com.github.t3chmas.authorizations.storage.role;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

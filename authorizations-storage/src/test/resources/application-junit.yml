@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+logging:
+  level:
+    jakarta.persistence: INFO
+    org.hibernate.orm: INFO
+    org.springframework: INFO

@@ -1,9 +1,9 @@
-package com.github.hasable.authorizations.web.domain.permission;
+package com.github.t3chmas.authorizations.web.domain.permission;
 
 import com.github.t3chmas.authorizations.core.permission.Permission;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", implementationName = "PermissionWebMapper")
 public interface PermissionMapper {
 
     PermissionDTO permissionToPermissionDTO(Permission p);

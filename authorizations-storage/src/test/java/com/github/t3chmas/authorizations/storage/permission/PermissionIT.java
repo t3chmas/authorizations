@@ -1,75 +1,82 @@
-package com.github.hasable.authorizations.storage.permission;
+package com.github.t3chmas.authorizations.storage.permission;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.time.Instant;
+import com.github.t3chmas.authorizations.storage.config.LiquibaseConfig;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
+
+import java.time.Instant;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
+@Import(LiquibaseConfig.class)
 public class PermissionIT {
 
-  @Autowired PermissionRepository permissionRepository;
-  
-  /** Test createdAt and modifiedAt fields. */
-  @Test
-  public void testCommon() {
+    @Autowired
+    PermissionRepository permissionRepository;
 
-    // Given
-    PermissionEntity subject = new PermissionEntity();
-    subject.setCode(RandomStringUtils.randomAlphanumeric(255));
-    subject.setDescription(RandomStringUtils.randomAlphanumeric(4096));
+    /**
+     * Test createdAt and modifiedAt fields.
+     */
+    @Test
+    public void testCommon() {
 
-    // when not created
+        // Given
+        PermissionEntity subject = new PermissionEntity();
+        subject.setCode(RandomStringUtils.randomAlphanumeric(255));
+        subject.setDescription(RandomStringUtils.randomAlphanumeric(4096));
 
-    // then
-    assertNull(subject.getCreatedAt());
-    assertNull(subject.getModifiedAt());
+        // when not created
 
-    // when created
-    this.permissionRepository.saveAndFlush(subject);
+        // then
+        assertNull(subject.getCreatedAt());
+        assertNull(subject.getModifiedAt());
 
-    // then
-    Instant created = subject.getCreatedAt();
-    assertNotNull(created);
+        // when created
+        this.permissionRepository.saveAndFlush(subject);
 
-    Instant firstModified = subject.getModifiedAt();
-    assertNotNull(firstModified);
+        // then
+        Instant created = subject.getCreatedAt();
+        assertNotNull(created);
 
-    // Given not yet modified
-    // then
-    assertEquals(created, firstModified);
+        Instant firstModified = subject.getModifiedAt();
+        assertNotNull(firstModified);
 
-    // when modified
-    subject.setDescription(RandomStringUtils.randomAlphanumeric(4096));
-    this.permissionRepository.saveAndFlush(subject);
+        // Given not yet modified
+        // then
+        assertEquals(created, firstModified);
 
-    // then
-    Assertions.assertEquals(created, subject.getCreatedAt());
-    Assertions.assertNotEquals(created, subject.getModifiedAt());
-    assertTrue(firstModified.isBefore(subject.getModifiedAt()));
-  }
+        // when modified
+        subject.setDescription(RandomStringUtils.randomAlphanumeric(4096));
+        this.permissionRepository.saveAndFlush(subject);
 
-  @Test
-  public void testPermission() {
+        // then
+        Assertions.assertEquals(created, subject.getCreatedAt());
+        Assertions.assertNotEquals(created, subject.getModifiedAt());
+        assertTrue(firstModified.isBefore(subject.getModifiedAt()));
+    }
 
-    // given not yet created
-    PermissionEntity subject = new PermissionEntity();
-    subject.setCode(RandomStringUtils.randomAlphanumeric(255));
-    subject.setDescription(RandomStringUtils.randomAlphanumeric(4096));
-    assertNull(subject.getId());
+    @Test
+    public void testPermission() {
 
-    // when created
-    this.permissionRepository.saveAndFlush(subject);
-    PermissionEntity retrieved =
-        this.permissionRepository.findByCode(subject.getCode()).orElseThrow();
+        // given not yet created
+        PermissionEntity subject = new PermissionEntity();
+        subject.setCode(RandomStringUtils.randomAlphanumeric(255));
+        subject.setDescription(RandomStringUtils.randomAlphanumeric(4096));
+        assertNull(subject.getId());
 
-    // then
-    assertNotNull(subject.getId());
-    assertEquals(subject.getCode(), retrieved.getCode());
-    assertEquals(subject.getDescription(), retrieved.getDescription());
-  }
+        // when created
+        this.permissionRepository.saveAndFlush(subject);
+        PermissionEntity retrieved =
+            this.permissionRepository.findByCode(subject.getCode()).orElseThrow();
+
+        // then
+        assertNotNull(subject.getId());
+        assertEquals(subject.getCode(), retrieved.getCode());
+        assertEquals(subject.getDescription(), retrieved.getDescription());
+    }
 }

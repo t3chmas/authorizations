@@ -1,4 +1,4 @@
-package com.github.hasable.authorizations.web.domain.permission;
+package com.github.t3chmas.authorizations.web.domain.permission;
 
 import com.github.t3chmas.authorizations.core.permission.PermissionService;
 import com.github.t3chmas.authorizations.web.domain.common.ResourceNotFoundException;

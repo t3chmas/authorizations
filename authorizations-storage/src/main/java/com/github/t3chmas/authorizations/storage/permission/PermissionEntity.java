@@ -1,6 +1,6 @@
-package com.github.hasable.authorizations.storage.permission;
+package com.github.t3chmas.authorizations.storage.permission;
 
-import com.github.hasable.authorizations.storage.common.Traceable;
+import com.github.t3chmas.authorizations.storage.common.Traceable;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,13 +15,18 @@ import lombok.*;
 @Entity(name = "permission")
 public class PermissionEntity extends Traceable {
 
-  /** Primary key */
-  @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "permission_id_seq")
-  @SequenceGenerator(name = "permission_id_seq", allocationSize = 1)
-  private Long id;
+    /**
+     * Primary key
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "permission_id_seq")
+    @SequenceGenerator(name = "permission_id_seq", allocationSize = 1)
+    private Long id;
 
-  @Nonnull @EqualsAndHashCode.Include private String code;
+    @Nonnull
+    @EqualsAndHashCode.Include
+    private String code;
 
-  @Lob private String description;
+    @Lob
+    private String description;
 }

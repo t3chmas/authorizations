@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
-public class RolePermissionIT {
+public class RolePermissionTest {
 
     @Autowired
     RoleRepository roleRepository;
@@ -32,7 +32,7 @@ public class RolePermissionIT {
     public void testRolePermission() {
 
         // given not yet created
-        RoleEntity role = roleRepository.save(RoleIT.createRandomRole());
+        RoleEntity role = roleRepository.save(RoleTest.createRandomRole());
 
         PermissionEntity p1, p2;
         p1 = permissionRepository.save(PermissionTest.createRandomPermission());

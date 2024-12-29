@@ -5,6 +5,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 @AutoConfiguration
 @ComponentScan
-public class AutoConfig {
+public class AuthorizationWebAutoConfiguration {
 
 }

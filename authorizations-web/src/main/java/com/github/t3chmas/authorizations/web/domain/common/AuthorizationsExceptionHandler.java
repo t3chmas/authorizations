@@ -1,4 +1,4 @@
-package com.github.hasable.authorizations.web.domain.common;
+package com.github.t3chmas.authorizations.web.domain.common;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

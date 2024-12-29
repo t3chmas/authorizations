@@ -1,7 +1,7 @@
-package com.github.hasable.authorizations.storage.role;
+package com.github.t3chmas.authorizations.storage.role;
 
-import com.github.hasable.authorizations.storage.common.Traceable;
-import com.github.hasable.authorizations.storage.permission.PermissionEntity;
+import com.github.t3chmas.authorizations.storage.common.Traceable;
+import com.github.t3chmas.authorizations.storage.permission.PermissionEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,15 +14,16 @@ import lombok.*;
 @Builder
 public class RolePermissionEntity extends Traceable {
 
-  @EmbeddedId private final RolePermissionId id = new RolePermissionId();
+    @EmbeddedId
+    private final RolePermissionId id = new RolePermissionId();
 
-  @ManyToOne
-  @MapsId("roleId")
-  @JoinColumn(name = "role_id")
-  private RoleEntity role;
+    @ManyToOne
+    @MapsId("roleId")
+    @JoinColumn(name = "role_id")
+    private RoleEntity role;
 
-  @ManyToOne
-  @MapsId("permissionId")
-  @JoinColumn(name = "permission_id")
-  private PermissionEntity permission;
+    @ManyToOne
+    @MapsId("permissionId")
+    @JoinColumn(name = "permission_id")
+    private PermissionEntity permission;
 }

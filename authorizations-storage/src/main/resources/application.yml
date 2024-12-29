@@ -1,0 +1,9 @@
+spring:
+  hibernate:
+    ddl-auto: validate
+  liquibase:
+    change-log: classpath:liquibase/db.changelog.yml
+
+logging:
+  level:
+    org.springframework: INFO

@@ -8,8 +8,25 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: validate
+    properties:
+      hibernate:
+        cache:
+          use_second_level_cache: false # prevent strange behavior during test
+        # never ever ever in production
+        generate_statistics: true
+        session:
+          events:
+            log: false # (set to true when activating generate_statistics)
+        show_sql: false
   liquibase:
     change-log: classpath:liquibase/db.changelog.yml
   test:
     database:
       replace: none # we are already using a test configuration, so no need to replace anything
+
+logging:
+  level:
+    org.hibernate: OFF
+    org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: OFF
+    org.springframework: INFO
+

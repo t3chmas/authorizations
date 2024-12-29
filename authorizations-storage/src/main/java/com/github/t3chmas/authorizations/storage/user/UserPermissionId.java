@@ -1,4 +1,4 @@
-package com.github.hasable.authorizations.storage.user;
+package com.github.t3chmas.authorizations.storage.user;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class UserPermissionId {
 
-  private long userId;
+    private long userId;
 
-  private long permissionId;
+    private long permissionId;
 }

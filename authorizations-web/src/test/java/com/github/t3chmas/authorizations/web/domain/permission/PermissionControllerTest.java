@@ -1,4 +1,4 @@
-package com.github.hasable.authorizations.web.domain.permission;
+package com.github.t3chmas.authorizations.web.domain.permission;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(PermissionController.class)
-@Import({HalHateoasConfiguration.class, PermissionModelAssembler.class, PermissionMapperImpl.class})
+@Import({HalHateoasConfiguration.class, PermissionModelAssembler.class, PermissionWebMapper.class})
 public class PermissionControllerTest {
 
     @Autowired
@@ -172,7 +172,11 @@ public class PermissionControllerTest {
     }
 
     public Permission randomPermission() {
-        return Permission.builder().code(RandomStringUtils.randomAlphanumeric(32)).description(RandomStringUtils.randomAlphanumeric(128)).build();
+        return Permission
+            .builder()
+            .code(RandomStringUtils.insecure().nextAlphanumeric(32))
+            .description(RandomStringUtils.insecure().nextAlphanumeric(128))
+            .build();
     }
 
     public List<Permission> randomPermissions(int count) {

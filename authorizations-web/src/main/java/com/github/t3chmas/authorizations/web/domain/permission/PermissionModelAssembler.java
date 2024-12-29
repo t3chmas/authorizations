@@ -1,4 +1,4 @@
-package com.github.hasable.authorizations.web.domain.permission;
+package com.github.t3chmas.authorizations.web.domain.permission;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;

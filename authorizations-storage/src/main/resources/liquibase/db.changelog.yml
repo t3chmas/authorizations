@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: classpath:liquibase/db.changelog1.yml
+  - include:
+      file: classpath:liquibase/db.changelog2.yml
