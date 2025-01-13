@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-default-permissions
+      author: t3chmas
+      changes:
+        - insert:
+            tablename: permission
+            columns:
+              - column:
+                  name: code
+                  value: "read_permissions_*"
+              - column:
+                  name: description
+                  value: "Allows to read all permissions"
+              - column:
+                  name: created_at
+                  value: "now()"
+              - column:
+                  name: modified_at
+                  value: "now()"
+        - insert:
+            tablename: permission
+            columns:
+              - column:
+                  name: code
+                  value: "read_permissions_owned"
+              - column:
+                  name: description
+                  value: "Allows the current user to read only its permissions"
+              - column:
+                  name: created_at
+                  value: "now()"
+              - column:
+                  name: modified_at
+                  value: "now()"

@@ -38,9 +38,9 @@ public class PermissionAdapterTest {
     public void testFindAll() {
         // given ...
         HashMap<String, PermissionEntity> expectedMap = new HashMap<>();
-        PermissionEntity pe1 = PermissionTest.createRandomPermission();
+        PermissionEntity pe1 = PermissionEntityTest.createRandomPermission();
         expectedMap.put(pe1.getCode(), pe1);
-        PermissionEntity pe2 = PermissionTest.createRandomPermission();
+        PermissionEntity pe2 = PermissionEntityTest.createRandomPermission();
         expectedMap.put(pe2.getCode(), pe2);
 
         when(this.repository.findAll()).thenReturn(List.of(pe1, pe2));
@@ -59,7 +59,7 @@ public class PermissionAdapterTest {
     @Test
     public void testFindByCode() {
         // given ...
-        PermissionEntity pe1 = PermissionTest.createRandomPermission();
+        PermissionEntity pe1 = PermissionEntityTest.createRandomPermission();
 
         // then
         when(this.repository.findByCode(anyString()))

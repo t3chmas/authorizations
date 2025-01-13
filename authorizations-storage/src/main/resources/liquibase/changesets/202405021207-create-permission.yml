@@ -1,14 +1,20 @@
 databaseChangeLog:
   - changeSet:
       id: create-permission-table
-      author: hasable
+      author: t3chmas
       changes:
+        - createSequence:
+            sequenceName: permission_id_seq
+            cycle: false
+            startValue: 1024
+            incrementBy: 1
         - createTable:
             tableName: permission
             remarks: List of usable permissions
             columns:
               - column:
                   name: id
+                  defaultValueSequenceNext: permission_id_seq
                   type: bigint
                   constraints:
                     primaryKey: true
@@ -28,6 +34,7 @@ databaseChangeLog:
                   type: clob
               - column:
                   name: created_at
+                  defaultValueComputed: "now()"
                   type: timestamp
                   constraints:
                     nullable: false
@@ -36,10 +43,6 @@ databaseChangeLog:
                   name: modified_at
                   type: timestamp
                   constraints:
-                    nullable: false
+                    nullable: true
                     notNullConstraintName: nn_permission_modified_at
-        - createSequence:
-             sequenceName: permission_id_seq
-             cycle: false
-             startValue: 1024
-             incrementBy: 1
+

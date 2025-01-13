@@ -21,18 +21,27 @@ public class Role {
 
     private String description;
 
-    @Builder.Default
-    private Set<Permission> permissions = new HashSet<>();
-
-    public Role(String code) {
-        this(code, null, new HashSet<>());
-    }
-
-    public Role(String code, String description) {
-        this(code, description, new HashSet<>());
-    }
+    private Set<Permission> permissions;
 
     public void addPermission(Permission p) {
+        if (this.permissions == null)
+            this.permissions = new HashSet<>();
         this.getPermissions().add(p);
+    }
+
+    public boolean hasPermission(Permission permission) {
+        for (Permission p : permissions) {
+            if (p.equals(permission))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean hasPermission(String permissionCode) {
+        for (Permission p : permissions) {
+            if (p.getCode().equals(permissionCode))
+                return true;
+        }
+        return false;
     }
 }

@@ -1,14 +1,20 @@
 databaseChangeLog:
   - changeSet:
-      id: create-role-tables
-      author: hasable
+      id: create-role-table
+      author: t3chmas
       changes:
+        - createSequence:
+            sequenceName: role_id_seq
+            cycle: false
+            startValue: 1024
+            incrementBy: 1
         - createTable:
             tableName: role
             remarks: List of usable roles
             columns:
               - column:
                   name: id
+                  defaultValueSequenceNext: role_id_seq
                   type: bigint
                   constraints:
                     primaryKey: true
@@ -28,6 +34,7 @@ databaseChangeLog:
                   type: clob
               - column:
                   name: created_at
+                  defaultValueComputed: "now()"
                   type: timestamp
                   constraints:
                     nullable: false
@@ -35,14 +42,10 @@ databaseChangeLog:
               - column:
                   name: modified_at
                   type: timestamp
-                  constraints:
-                    nullable: false
-                    notNullConstraintName: nn_role_modified_at
-        - createSequence:
-             sequenceName: role_id_seq
-             cycle: false
-             startValue: 1024
-             incrementBy: 1
+  - changeSet:
+      id: create-role-permission-table
+      author: t3chmas
+      changes:
         - createTable:
             tableName: role_permission
             remarks: List permissions for each role
@@ -57,24 +60,27 @@ databaseChangeLog:
                     referencedTableName: role
                     referencedColumnNames: id
               - column:
-                 name: permission_id
-                 type: bigint
-                 constraints:
-                   nullable: false
-                   notNullConstraintName: nn_role_permission_permission_id
-                   foreignKeyName: fk_role_permission_permission_id
-                   referencedTableName: permission
-                   referencedColumnNames: id
+                  name: permission_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    notNullConstraintName: nn_role_permission_permission_id
+                    foreignKeyName: fk_role_permission_permission_id
+                    referencedTableName: permission
+                    referencedColumnNames: id
               - column:
                   name: created_at
                   type: timestamp
-                  defaultValueComputed: now(3)
+                  defaultValueComputed: "now()"
                   constraints:
                     nullable: false
                     notNullConstraintName: nn_role_created_at
               - column:
                   name: modified_at
                   type: timestamp
-                  constraints:
-                    nullable: false
-                    notNullConstraintName: nn_role_modified_at
+        - addPrimaryKey:
+            tableName: role_permission
+            columnNames: role_id,permission_id
+            constraintName: pk_role_permission
+
+

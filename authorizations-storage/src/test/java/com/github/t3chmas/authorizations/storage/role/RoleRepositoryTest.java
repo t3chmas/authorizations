@@ -1,16 +1,13 @@
 package com.github.t3chmas.authorizations.storage.role;
 
 import com.github.t3chmas.authorizations.storage.permission.PermissionEntity;
+import com.github.t3chmas.authorizations.storage.permission.PermissionEntityTest;
 import com.github.t3chmas.authorizations.storage.permission.PermissionRepository;
-import com.github.t3chmas.authorizations.storage.permission.PermissionTest;
 import jakarta.persistence.EntityManager;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 import java.util.Set;
@@ -34,13 +31,7 @@ public class RoleRepositoryTest {
     EntityManager entityManager;
 
     @Autowired
-    Session session;
-
-    @Autowired
     SessionFactory sessionFactory;
-
-    @Autowired
-    JpaProperties jpaProperties;
 
     /**
      * Tests that normal behavior is n+1 queries to get a role with its permissions
@@ -48,10 +39,10 @@ public class RoleRepositoryTest {
     @Test
     public void testFindOneWithoutGettingPermissions() {
         // given not yet created
-        PermissionEntity pe1 = this.permissionRepository.save(PermissionTest.createRandomPermission());
-        PermissionEntity pe2 = this.permissionRepository.save(PermissionTest.createRandomPermission());
+        PermissionEntity pe1 = this.permissionRepository.save(PermissionEntityTest.createRandomPermission());
+        PermissionEntity pe2 = this.permissionRepository.save(PermissionEntityTest.createRandomPermission());
 
-        RoleEntity base = RoleTest.createRandomRole();
+        RoleEntity base = RoleEntityTest.createRandomRole();
         base.setRolePermission(Set.of(new RolePermissionEntity(base, pe1), new RolePermissionEntity(base, pe2)));
         base = this.roleRepository.saveAndFlush(base);
         this.rolePermissionRepository.saveAllAndFlush(List.of(new RolePermissionEntity(base, pe1), new RolePermissionEntity(base, pe2)));
@@ -83,10 +74,10 @@ public class RoleRepositoryTest {
     @Test
     public void testFindOneWithGettingPermissions() {
         // given not yet created
-        PermissionEntity pe1 = this.permissionRepository.save(PermissionTest.createRandomPermission());
-        PermissionEntity pe2 = this.permissionRepository.save(PermissionTest.createRandomPermission());
+        PermissionEntity pe1 = this.permissionRepository.save(PermissionEntityTest.createRandomPermission());
+        PermissionEntity pe2 = this.permissionRepository.save(PermissionEntityTest.createRandomPermission());
 
-        RoleEntity base = RoleTest.createRandomRole();
+        RoleEntity base = RoleEntityTest.createRandomRole();
         base.setRolePermission(Set.of(new RolePermissionEntity(base, pe1), new RolePermissionEntity(base, pe2)));
         base = this.roleRepository.saveAndFlush(base);
         this.rolePermissionRepository.saveAllAndFlush(List.of(new RolePermissionEntity(base, pe1), new RolePermissionEntity(base, pe2)));
@@ -98,8 +89,8 @@ public class RoleRepositoryTest {
 
         // First guess was sessionFactory.getStatistics().getQueryExecutionCount(), but it does not work as I expected
         beforeRole = sessionFactory.getStatistics().getPrepareStatementCount();
-        //RoleEntity subject = this.roleRepository.findByCode(base.getCode(), true).orElseThrow();
-        RoleEntity subject = this.roleRepository.findOne(Specification.where(RoleRepository.byCode(base.getCode())).and(RoleRepository.withPermissions())).orElseThrow();
+        RoleEntity subject = this.roleRepository.findByCode(base.getCode(), true).orElseThrow();
+        //RoleEntity subject = this.roleRepository.findOne(Specification.where(RoleRepository.byCode(base.getCode())).and(RoleRepository.withPermissions())).orElseThrow();
         afterRole = sessionFactory.getStatistics().getPrepareStatementCount();
         assertEquals(base.getCode(), subject.getCode());
         assertEquals(beforeRole + 1, afterRole);

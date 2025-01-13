@@ -1,8 +1,8 @@
 package com.github.t3chmas.authorizations.storage.role;
 
 import com.github.t3chmas.authorizations.storage.permission.PermissionEntity;
+import com.github.t3chmas.authorizations.storage.permission.PermissionEntityTest;
 import com.github.t3chmas.authorizations.storage.permission.PermissionRepository;
-import com.github.t3chmas.authorizations.storage.permission.PermissionTest;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +32,11 @@ public class RolePermissionTest {
     public void testRolePermission() {
 
         // given not yet created
-        RoleEntity role = roleRepository.save(RoleTest.createRandomRole());
+        RoleEntity role = roleRepository.save(RoleEntityTest.createRandomRole());
 
         PermissionEntity p1, p2;
-        p1 = permissionRepository.save(PermissionTest.createRandomPermission());
-        p2 = permissionRepository.save(PermissionTest.createRandomPermission());
+        p1 = permissionRepository.save(PermissionEntityTest.createRandomPermission());
+        p2 = permissionRepository.save(PermissionEntityTest.createRandomPermission());
 
         // when permissions have been set to role
         RolePermissionEntity rolePermission = new RolePermissionEntity();

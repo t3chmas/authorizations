@@ -1,5 +1,9 @@
 databaseChangeLog:
   - include:
-      file: classpath:liquibase/db.changelog1.yml
+      file: liquibase/changesets/202405021207-create-permission.yml
   - include:
-      file: classpath:liquibase/db.changelog2.yml
+      file: liquibase/changesets/202405191443-create-role.yml
+  - include:
+      file: liquibase/changesets/202406161124-create-user.yml
+  - include:
+      file: liquibase/changesets/202412292130-add-default-permissions.yml

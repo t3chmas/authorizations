@@ -43,6 +43,7 @@ public class RoleEntity extends Traceable {
     private String description;
 
     @OneToMany(mappedBy = "role")
+    @ToString.Exclude
     private Set<RolePermissionEntity> rolePermission;
 
 }

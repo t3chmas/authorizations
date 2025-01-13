@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: create-user-tables
-      author: hasable
+      author: t3chmas
       changes:
         - createTable:
             tableName: user
@@ -36,10 +36,10 @@ databaseChangeLog:
                     nullable: false
                     notNullConstraintName: nn_role_modified_at
         - createSequence:
-             sequenceName: user_id_seq
-             cycle: false
-             startValue: 1024
-             incrementBy: 1
+            sequenceName: user_id_seq
+            cycle: false
+            startValue: 1024
+            incrementBy: 1
         - createTable:
             tableName: user_role
             remarks: List roles for each user
