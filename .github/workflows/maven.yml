@@ -19,9 +19,8 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-  git
+
 steps:
   - uses: actions/checkout@v4
   - name: Set up JDK 17
