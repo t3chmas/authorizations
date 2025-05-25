@@ -99,17 +99,17 @@ public class RoleAdapter implements RolePort {
             }
         }
         entityManager.flush();
-        // need because we use Criteria query...
+        // needed because we use Criteria query...
         entityManager.clear();
         return this.findByCode(role.getCode(), role.getPermissions() != null).orElseThrow();
     }
 
     @Override
     @Transactional
-    public void remove(Role role) {
+    public void remove(String role) {
         // Get corresponding RoleEntity from database if possible, else throw an exception
-        RoleEntity roleEntity = this.repository.findByCode(role.getCode(), false)
-            .orElseThrow(() -> new IllegalArgumentException("Cannot remove role <" + role.getCode() + "> from database"));
+        RoleEntity roleEntity = this.repository.findByCode(role, false)
+            .orElseThrow(() -> new IllegalArgumentException("Cannot remove role <" + role + "> from database"));
 
         long count = this.rpRepository.deleteByRoleId(roleEntity.getId());
         this.repository.delete(roleEntity);

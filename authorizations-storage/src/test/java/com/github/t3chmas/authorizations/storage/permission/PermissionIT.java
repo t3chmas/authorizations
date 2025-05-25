@@ -1,6 +1,6 @@
 package com.github.t3chmas.authorizations.storage.permission;
 
-import com.github.t3chmas.authorizations.storage.config.LiquibaseConfig;
+import com.github.t3chmas.authorizations.storage.LiquibaseConfig;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

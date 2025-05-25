@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 /**
  * Had to use "setter" to inject PermissionMapper, see <a href="https://github.com/mapstruct/mapstruct/issues/2257">support component injection in abstract base class issue</a>.
  */
-@Mapper(componentModel = "spring", implementationName = "RoleStorageMapper", uses = {PermissionMapper.class}, injectionStrategy = InjectionStrategy.FIELD)
+@Mapper(componentModel = "spring", implementationName = "RoleStorageMapper", uses = {PermissionMapper.class}, injectionStrategy = InjectionStrategy.SETTER)
 @Setter
 public abstract class RoleMapper {
 

@@ -25,7 +25,7 @@
     <modules>
         <module>authorizations-core</module>
         <module>authorizations-storage</module>
-        <module>authorizations-web</module>
+        <module>authorizations-hateoas</module>
         <module>authorizations-app</module>
     </modules>
 
@@ -119,7 +119,7 @@
                 <plugin>
                     <groupId>org.owasp</groupId>
                     <artifactId>dependency-check-maven</artifactId>
-                    <version>11.1.0</version>
+                    <version>12.1.0</version>
                     <configuration>
                         <!-- API Key is configured in settings.xml -->
                         <nvdApiServerId>nvd.nist.gov</nvdApiServerId>

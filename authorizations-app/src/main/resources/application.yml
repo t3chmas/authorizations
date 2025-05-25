@@ -4,10 +4,10 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password: password
+  hibernate:
+    ddl-auto: validate
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: validate
   liquibase:
     change-log: classpath:liquibase/db.changelog.yml
 

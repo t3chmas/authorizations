@@ -15,7 +15,7 @@ import java.util.Set;
 @Service
 public class RoleService {
 
-    private final Logger logger = LoggerFactory.getLogger(RolePort.class);
+    private final Logger logger = LoggerFactory.getLogger(RoleService.class);
 
     private RolePort repository;
 
@@ -47,9 +47,16 @@ public class RoleService {
         return role;
     }
 
-    public void store(Role role) {
+    public Role store(Role role) {
         if (role == null) throw new IllegalArgumentException("<role> must not be blank");
-        this.repository.save(role);
+        return this.repository.save(role);
+    }
 
+    public void remove(String role) {
+        this.repository.remove(role);
+    }
+
+    public void remove(Role role) {
+        this.remove(role.getCode());
     }
 }

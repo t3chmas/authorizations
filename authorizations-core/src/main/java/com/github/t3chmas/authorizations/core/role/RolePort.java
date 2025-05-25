@@ -53,7 +53,16 @@ public interface RolePort {
     /**
      * Delete the role
      *
+     * @param role the code of the role to delete
+     */
+    void remove(String role);
+
+    /**
+     * Delete the role
+     *
      * @param role the role to delete
      */
-    void remove(Role role);
+    default void remove(Role role) {
+        this.remove(role.getCode());
+    }
 }

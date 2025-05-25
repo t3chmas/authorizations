@@ -132,11 +132,11 @@ public class RoleAdapterIT {
         this.rolePermissionRepository.save(RolePermissionEntity.builder().role(re2).permission(this.permissionRepository.save(PermissionEntityTest.createRandomPermission())).build());
 
         // when I remove a role without permission then it should be missing
-        this.roleAdapter.remove(this.roleAdapter.findByCode(re1.getCode()).orElseThrow());
+        this.roleAdapter.remove(this.roleAdapter.findByCode(re1.getCode()).orElseThrow().getCode());
         assertTrue(this.roleAdapter.findByCode(re1.getCode()).isEmpty());
 
         // when I remove a role with permissions then it should be missing
-        this.roleAdapter.remove(this.roleAdapter.findByCode(re2.getCode()).orElseThrow());
+        this.roleAdapter.remove(this.roleAdapter.findByCode(re2.getCode()).orElseThrow().getCode());
         assertTrue(this.roleAdapter.findByCode(re2.getCode()).isEmpty());
     }
 }
